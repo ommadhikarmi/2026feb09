@@ -2,20 +2,25 @@ import express from 'express'
 const app = express();
 
 import path from 'path';
+import { VIEWS  } from './import/path.js';
 
 app.get('/',(req,resp)=>{
-    let absolute_path =path.resolve('view/home.html')
-    resp.sendFile(absolute_path)
+    resp.sendFile(path.join(VIEWS,'home.html'))
 });
 
 app.get('/login',(req,resp)=>{
-    let absolute_path =path.resolve('view/login.html')
-    resp.sendFile(absolute_path)
+   
+    resp.sendFile(path.join(VIEWS,'login.html'))
 });
 
 app.get('/about',(req,resp)=>{
-    let absolute_path =path.resolve('view/about.html')
-    resp.sendFile(absolute_path)
+  
+    resp.sendFile(path.join(VIEWS,'about.html'))
+});
+
+app.use((req,resp)=>{
+    
+    resp.status(404).sendFile(path.join(VIEWS,'404.html'))
 });
 
 app.listen(1000, ()=>{
